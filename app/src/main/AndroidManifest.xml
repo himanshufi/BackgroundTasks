@@ -25,6 +25,11 @@
             android:enabled="true"
             android:exported="false"/>
 
+        <receiver
+            android:name=".broadcast.receiver.SnoozeReceiver"
+            android:enabled="true"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

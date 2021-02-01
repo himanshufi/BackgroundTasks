@@ -32,7 +32,6 @@ class NotifWorker(appContext: Context, workerParams: WorkerParameters): Worker(a
             notifyPendingIntent
         )
 
-
         return Result.success()
     }
 
