@@ -15,8 +15,8 @@ We are also showing a <b>notification</b> with a button to <b>re-execute</b> the
 <br><br>
 Also, we are observing the table's data to reflect the changes on UI in case of any change.
 <br><br>
-Following are the tasks which are executed in the `WorkManager`:
-1. Network call: To fetch the data.
-2. Database operation: To save the data into the db.
+<b>Following are the tasks which are executed in the `WorkManager`: </b>
+ * Network call: To fetch the data.
+ * Database operation: To save the data into the db.
 
-### Note: The operations will execute even if app is closed.
+### Note: The operations will execute even if the app is closed.
