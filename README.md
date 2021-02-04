@@ -10,8 +10,10 @@ You will find different implementation on different branches.
  and `AlarmManager`. The `Coroutine Worker` of `WorkManager` is used to execute the background task,
  once all the constraints are satisfied.
 <br><br>
-We are also showing a <b>notification</b> with a button to <b>redo</b> the task using a `AlarmManager`,
-once the `work` is executed.
+We are also showing a <b>notification</b> with a button to <b>re-execute</b> the task using a 
+`AlarmManager`, once the `work` is executed.
+<br><br>
+Also, we are observing the table's data to reflect the changes on UI in case of any change.
 <br><br>
 Following are the tasks which are executed in the `WorkManager`:
 1. Network call: To fetch the data.

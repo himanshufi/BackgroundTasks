@@ -21,8 +21,10 @@ class Overview {
      *
      * In this branch, we are executing a background task using `WorkManager` and `AlarmManager`.
      * The Work is being executed using `CoroutineWorker`, once all the constraints are satisfied.
-     * Once the work is done, we will show a notification which displays the status of the operation
-     * which is executed in the `Worker`.
+     * Once the work is done, we will show a notification using `AlarmManager` which displays the
+     * status of the operation which is executed in the `Worker` and a button to re-execute the
+     * operation.
+     *
      *
      * Also, we are observing a table in the DB. If there is any change occurs in the data of that
      * table then the changes will be reflected on the UI.
