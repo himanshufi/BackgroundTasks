@@ -20,6 +20,9 @@ interface PostDao {
      */
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertItem(item: PostModel)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertItems(item: List<PostModel>): List<Long>
 
     /**

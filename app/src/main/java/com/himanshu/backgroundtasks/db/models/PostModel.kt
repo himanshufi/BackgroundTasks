@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class PostModel(
-        val userId:Int,
-        @PrimaryKey val id:Int,
+        val userId:Long,
+        @PrimaryKey val id:Long,
         val title:String,
         val body:String
 )

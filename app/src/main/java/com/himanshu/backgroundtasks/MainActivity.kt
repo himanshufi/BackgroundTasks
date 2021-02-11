@@ -1,19 +1,25 @@
 @file:Suppress("KDocUnresolvedReference")
 package com.himanshu.backgroundtasks
 
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
+import android.text.format.DateUtils
 import androidx.activity.viewModels
+import androidx.core.app.AlarmManagerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.work.*
 import com.himanshu.backgroundtasks.databinding.ActivityMainBinding
-import com.himanshu.backgroundtasks.execution.workmanager.NotifWorker
+import com.himanshu.backgroundtasks.execution.receiver.NotificationExecutor
 import com.himanshu.backgroundtasks.viewmodel.MainViewModel
-import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,19 +64,22 @@ class MainActivity : AppCompatActivity() {
      */
 
     private fun scheduleTask() {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.UNMETERED)
-            .build()
+        val notifyIntent = Intent(applicationContext, NotificationExecutor::class.java)
+        val alarmManager = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        val uploadWorkRequest: WorkRequest =
-            OneTimeWorkRequestBuilder<NotifWorker>()
-                .setConstraints(constraints)
-                .setInitialDelay(60, TimeUnit.SECONDS)
-                .build()
+        val notifyPendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            0,
+            notifyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
-        WorkManager
-            .getInstance(this)
-            .enqueue(uploadWorkRequest)
+        AlarmManagerCompat.setExactAndAllowWhileIdle(
+            alarmManager,
+            AlarmManager.ELAPSED_REALTIME_WAKEUP,
+            SystemClock.elapsedRealtime() + (DateUtils.SECOND_IN_MILLIS * 5),
+            notifyPendingIntent
+        )
     }
 
     /**
