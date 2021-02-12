@@ -39,6 +39,9 @@ interface PostDao {
     @Query("SELECT * FROM PostModel")
     fun getPostCount(): LiveData<List<PostModel>>
 
+    @Query("SELECT * FROM PostModel")
+    suspend fun getAllItems(): List<PostModel>
+
 
     /**
      *

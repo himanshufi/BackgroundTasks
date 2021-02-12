@@ -32,7 +32,17 @@ class MainActivity : AppCompatActivity() {
 
         createChannel()
         observeItemsCount()
-        scheduleTask()
+        setOnClickListener()
+    }
+
+    private fun setOnClickListener() {
+        binding.startBtn.setOnClickListener {
+            scheduleTask()
+        }
+
+        binding.closeBtn.setOnClickListener {
+            finish()
+        }
     }
 
     /**

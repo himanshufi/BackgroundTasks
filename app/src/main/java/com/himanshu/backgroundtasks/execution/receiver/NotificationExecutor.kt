@@ -7,8 +7,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.os.Handler
-import android.os.Looper
 import android.os.SystemClock
 import android.text.format.DateUtils
 import androidx.core.app.AlarmManagerCompat
@@ -17,6 +15,12 @@ import com.himanshu.backgroundtasks.App
 import com.himanshu.backgroundtasks.utils.Constants
 import com.himanshu.backgroundtasks.R
 import com.himanshu.backgroundtasks.execution.async.CustomThread
+
+/**
+ * Re-schedule [AlarmManager] in case of:
+ * BOOT_COMPLETED Broadcast
+ * PACKAGE_UPDATED Broadcast
+ */
 
 class NotificationExecutor: BroadcastReceiver() {
 
@@ -42,8 +46,13 @@ class NotificationExecutor: BroadcastReceiver() {
         val mNotificationManager = p0.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         mNotificationManager.notify(1, builder.build())
 
+        scheduleAlarm(p0)
+        App.handler.post(CustomThread(p0))
+
+    }
+
+    private fun scheduleAlarm(p0: Context) {
         val notifyIntent = Intent(p0, NotificationExecutor::class.java)
-        notifyIntent.putExtra(Constants.STATUS, isDataSaved)
         val alarmManager = p0.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val notifyPendingIntent = PendingIntent.getBroadcast(
@@ -59,10 +68,6 @@ class NotificationExecutor: BroadcastReceiver() {
             SystemClock.elapsedRealtime() + (DateUtils.SECOND_IN_MILLIS * 5),
             notifyPendingIntent
         )
-
-//        val pendingResult = goAsync()
-        App.handler.post(CustomThread())
-
     }
 
 }

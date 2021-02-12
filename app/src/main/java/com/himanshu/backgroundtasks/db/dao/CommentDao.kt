@@ -34,7 +34,7 @@ interface CommentDao {
      */
 
     @Query("SELECT * FROM CommentModel")
-    suspend fun getItemsCount(): List<CommentModel>
+    suspend fun getItems(): List<CommentModel>
 
 
     /**

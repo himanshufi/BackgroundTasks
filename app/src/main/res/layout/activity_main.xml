@@ -8,14 +8,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/startBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            android:text="@string/start"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"/>
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="19sp"
             android:textColor="@color/black"
-            android:layout_centerInParent="true"/>
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/startBtn" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/closeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/close"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
 </layout>
